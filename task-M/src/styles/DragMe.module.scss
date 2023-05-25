@@ -1,0 +1,39 @@
+
+._container{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  row-gap: clamp(22px, 4vw, 60px);
+  h1{
+    font-size: clamp(24px, 3vw, 58px);
+    color: black;
+    width: fit-content;
+    margin: auto;
+    span{
+      color: orangered;
+    }
+  }
+.flex {
+  
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  width: 100%;
+  column-gap: 4rem;
+  padding: clamp(16px, 2vw, 48px);
+  flex-wrap: wrap;
+  row-gap: 2rem;
+  margin: auto;
+
+  @media screen and (max-width: 1168px) {
+    justify-content: center;
+    align-items: flex-start;
+    row-gap: 4rem;
+    padding: clamp(16px, 2vw, 48px);
+  }
+}
+}
+
+
+ 

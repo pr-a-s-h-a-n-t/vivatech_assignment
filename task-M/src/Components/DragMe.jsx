@@ -1,72 +1,120 @@
 import React, { useState } from "react";
-import "../styles/DragMe.scss";
+import styles from "../styles/DragMe.module.scss";
 import ListCard from "./new";
 
 function DragCards() {
   const [widgets, setWidgets] = useState([]);
   const [widgets1, setWidgets1] = useState([]);
   const [widgets2, setWidgets2] = useState([]);
-  const [dd, setDd] = useState("");
-  const [task, setTask] = useState([]);
-  const [task1, setTask1] = useState([]);
-  const [task2, setTask2] = useState([]);
 
-  const handleOnDragStart = (e, widgetType) => {
+  const handleOnDragStart = (e, widgetType, cardIndex) => {
     e.dataTransfer.setData("widgetType", widgetType);
-    console.log("handleOnDragStart--", e.target.id, " widgetType ", widgetType);
+    e.dataTransfer.setData("cardIndex", cardIndex);
   };
 
-  const handleOnDrop = (e) => {
-    console.log("handleOnDrop--", e);
-
+  const handleOnDrop = (e, cardIndex) => {
     e.preventDefault();
     const widgetType = e.dataTransfer.getData("widgetType");
-    const widgetsList = [...widgets, widgetType];
-    setWidgets(widgetsList);
-  };
+    const sourceCardIndex = e.dataTransfer.getData("cardIndex");
 
-  const handleOnDrop1 = (e) => {
-    console.log("handleOnDrop1--", e);
+    if (cardIndex !== sourceCardIndex) {
+      if (sourceCardIndex === "0") {
+        const updatedWidgets = [...widgets];
+        updatedWidgets.splice(widgetType, 1);
+        setWidgets(updatedWidgets);
+      } else if (sourceCardIndex === "1") {
+        const updatedWidgets = [...widgets1];
+        updatedWidgets.splice(widgetType, 1);
+        setWidgets1(updatedWidgets);
+      } else if (sourceCardIndex === "2") {
+        const updatedWidgets = [...widgets2];
+        updatedWidgets.splice(widgetType, 1);
+        setWidgets2(updatedWidgets);
+      }
 
-    e.preventDefault();
-    const widgetType = e.dataTransfer.getData("widgetType");
-    const widgetsList = [...widgets1, widgetType];
-    setWidgets1(widgetsList);
-  };
-
-  const handleOnDrop2 = (e) => {
-    console.log("handleOnDrop2--", e);
-
-    e.preventDefault();
-    const widgetType = e.dataTransfer.getData("widgetType");
-    const widgetsList = [...widgets2, widgetType];
-    setWidgets2(widgetsList);
+      if (cardIndex === "0") {
+        setWidgets([...widgets, widgetType]);
+      } else if (cardIndex === "1") {
+        setWidgets1([...widgets1, widgetType]);
+      } else if (cardIndex === "2") {
+        setWidgets2([...widgets2, widgetType]);
+      }
+    }
   };
 
   const handleOnDragOver = (e) => {
     e.preventDefault();
   };
 
-  // console.log("widgets---", widgets);
+  const handleWidgetRemove = (index, cardIndex) => {
+    if (cardIndex === "0") {
+      const updatedWidgets = [...widgets];
+      updatedWidgets.splice(index, 1);
+      setWidgets(updatedWidgets);
+    } else if (cardIndex === "1") {
+      const updatedWidgets = [...widgets1];
+      updatedWidgets.splice(index, 1);
+      setWidgets1(updatedWidgets);
+    } else if (cardIndex === "2") {
+      const updatedWidgets = [...widgets2];
+      updatedWidgets.splice(index, 1);
+      setWidgets2(updatedWidgets);
+    }
+  };
+
+  const handleEdit = (index, value, cardIndex) => {
+    if (cardIndex === "0") {
+      const updatedWidgets = [...widgets];
+      updatedWidgets[index] = value;
+      setWidgets(updatedWidgets);
+    } else if (cardIndex === "1") {
+      const updatedWidgets = [...widgets1];
+      updatedWidgets[index] = value;
+      setWidgets1(updatedWidgets);
+    } else if (cardIndex === "2") {
+      const updatedWidgets = [...widgets2];
+      updatedWidgets[index] = value;
+      setWidgets2(updatedWidgets);
+    }
+  };
+
+  const handleDelete = (index, cardIndex) => {
+    if (cardIndex === "0") {
+      const updatedWidgets = [...widgets];
+      updatedWidgets.splice(index, 1);
+      setWidgets(updatedWidgets);
+    } else if (cardIndex === "1") {
+      const updatedWidgets = [...widgets1];
+      updatedWidgets.splice(index, 1);
+      setWidgets1(updatedWidgets);
+    } else if (cardIndex === "2") {
+      const updatedWidgets = [...widgets2];
+      updatedWidgets.splice(index, 1);
+      setWidgets2(updatedWidgets);
+    }
+  };
+
   return (
-    <div>
-      <div className="flex">
+    <div className={styles._container}>
+      <h1>
+        Your Task <span> Manager</span>
+      </h1>
+      <div className={styles.flex}>
         {["ToDo", "Doing", "Done"].map((item, index) => (
           <ListCard
             key={index}
             item={item}
-            className="drop-area"
-            handleOnDrop={
-              index === 0
-                ? handleOnDrop
-                : index === 1
-                ? handleOnDrop1
-                : handleOnDrop2
-            }
+            className={styles.droparea}
+            // handleOnDrop={handleOnDrop}
+            handleOnDrop={(e) => handleOnDrop(e, index.toString())}
             handleOnDragOver={handleOnDragOver}
-            handleOnDragStart={handleOnDragStart}
-            task={index === 0 ? task : index === 1 ? task1 : task2}
-            setTask={index === 0 ? setTask : index === 1 ? setTask1 : setTask2}
+            handleOnDragStart={(e, widgetType) =>
+              handleOnDragStart(e, widgetType, index.toString())
+            }
+            widgets={index === 0 ? widgets : index === 1 ? widgets1 : widgets2}
+            handleWidgetRemove={handleWidgetRemove}
+            handleEdit={handleEdit}
+            handleDelete={handleDelete}
           />
         ))}
       </div>

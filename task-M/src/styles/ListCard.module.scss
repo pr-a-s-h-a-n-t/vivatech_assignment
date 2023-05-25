@@ -1,28 +1,37 @@
 ._listCard {
   width: 300px;
   min-height: 350px;
-  border: 2px solid red;
+  box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
   border-radius: 40px;
   text-align: center;
   position: relative;
-  padding: 25px 1rem;
+  padding: 25px 1rem 60px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
   row-gap: clamp(16px, 2vw, 30px);
+  background-color: #242424;
+  label {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #fff;
+    background-color: #000;
+    padding: 5px 10px;
+    border-radius: 10px;
+  }
   ._input {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    // position: absolute;
-    // bottom: 20px;
-    // left: 50%;
-    // transform: translate(-50%, -20%);
+     
     textarea {
       width: 70%;
       resize: vertical;
+      padding: 8px 6px 4px;
+      box-sizing: border-box;
+      border-radius: 10px;
     }
   }
   ._taskWrapper {
@@ -33,11 +42,33 @@
     align-items: center;
     row-gap: clamp(10px, 2vw, 20px);
     ._task {
-      border: 2px solid;
-      border-radius: 15px;
-      width: 100%;
-      padding: 6px;
-      text-align: left;
+        border: 2px solid;
+        border-radius: 5px;
+        width: 100%;
+        padding: 6px;
+        text-align: left;
+        display: flex;
+        background-color: #242424;
+        color: #fff;
+        justify-content: space-between;
+        align-items: center;
+      td{
+        font-size: 14px;
+        font-weight: 600;
+        font-family: inherit;
+        color: #fff;
+        line-height: 20px;
+        padding: 0px 6px;
+      }
+      svg{
+        margin: 0px 4px;
+        cursor: pointer;
+      }
+    }
+
+    ._exportBtn{
+      position: absolute;
+      bottom: 1rem;
     }
   }
 }
