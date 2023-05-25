@@ -1,0 +1,43 @@
+._listCard {
+  width: 300px;
+  min-height: 350px;
+  border: 2px solid red;
+  border-radius: 40px;
+  text-align: center;
+  position: relative;
+  padding: 25px 1rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: clamp(16px, 2vw, 30px);
+  ._input {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    // position: absolute;
+    // bottom: 20px;
+    // left: 50%;
+    // transform: translate(-50%, -20%);
+    textarea {
+      width: 70%;
+      resize: vertical;
+    }
+  }
+  ._taskWrapper {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: clamp(10px, 2vw, 20px);
+    ._task {
+      border: 2px solid;
+      border-radius: 15px;
+      width: 100%;
+      padding: 6px;
+      text-align: left;
+    }
+  }
+}
