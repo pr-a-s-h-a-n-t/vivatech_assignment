@@ -1,9 +1,15 @@
 import React, { useState } from "react";
 import styles from "../../styles/ListCard.module.scss";
 
-function ListCard({ handleOnDragStart }) {
+function ListCard({
+  handleOnDragStart,
+  task,
+  setTask,
+  //  handleOnDrop,
+  item,
+}) {
   const [input, setInput] = useState("");
-  const [task, setTask] = useState([]);
+  // const [task, setTask] = useState([]);
 
   const addTask = () => {
     setTask([...task, input]);
@@ -14,6 +20,7 @@ function ListCard({ handleOnDragStart }) {
     e.preventDefault();
     const widgetType = e.dataTransfer.getData("widgetType");
     setTask([...task, widgetType]);
+    console.log("handleOnDrop after droping--", e.target.id);
   };
 
   const handleOnDragOver = (e) => {
@@ -40,14 +47,15 @@ function ListCard({ handleOnDragStart }) {
       </div>
 
       <div className={styles._taskWrapper}>
-        {task.map((item, index) => (
+        {task.map((task, index) => (
           <div
+            id={item}
             className={styles._task}
             key={index}
             draggable
-            onDragStart={(e) => handleOnDragStart(e, "widget1")}
+            onDragStart={(e) => handleOnDragStart(e, task)}
           >
-            <p>{item}</p>
+            <p>{task}</p>
             <button>Edit</button>
           </div>
         ))}

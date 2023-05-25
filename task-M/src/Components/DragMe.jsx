@@ -7,17 +7,13 @@ function DragCards() {
   const [widgets1, setWidgets1] = useState([]);
   const [widgets2, setWidgets2] = useState([]);
   const [dd, setDd] = useState("");
+  const [task, setTask] = useState([]);
+  const [task1, setTask1] = useState([]);
+  const [task2, setTask2] = useState([]);
 
   const handleOnDragStart = (e, widgetType) => {
     e.dataTransfer.setData("widgetType", widgetType);
-  };
-
-  const handleOnDragStart1 = (e, widgetType) => {
-    e.dataTransfer.setData("widgetType", widgetType);
-  };
-
-  const handleOnDragStart2 = (e, widgetType) => {
-    e.dataTransfer.setData("widgetType", widgetType);
+    console.log("handleOnDragStart--", e.target.id, " widgetType ", widgetType);
   };
 
   const handleOnDrop = (e) => {
@@ -51,49 +47,11 @@ function DragCards() {
     e.preventDefault();
   };
 
-  const handleWidgetRemove = (index) => {
-    const updatedWidgets = [...widgets];
-    updatedWidgets.splice(index, 1);
-    setWidgets(updatedWidgets);
-  };
-
-  const handleWidgetRemove1 = (index) => {
-    const updatedWidgets = [...widgets1];
-    updatedWidgets.splice(index, 1);
-    setWidgets(updatedWidgets);
-  };
-
-  const handleWidgetRemove2 = (index) => {
-    const updatedWidgets = [...widgets2];
-    updatedWidgets.splice(index, 1);
-    setWidgets(updatedWidgets);
-  };
-
-  const handleInput = (e) => {
-    // setDd(e.target.value);
-    setDd(e.target.value);
-    console.log(e.target);
-  };
-  const add = (e) => {
-    if (e.target.id === "one") {
-      console.log("one", dd);
-      setWidgets(dd);
-      setDd("");
-    }
-    if (e.target.id === "two") {
-      setWidgets1(dd);
-      setDd("");
-    }
-    if (e.target.id === "three") {
-      setWidgets2(dd);
-      setDd("");
-    }
-  };
   // console.log("widgets---", widgets);
   return (
     <div>
       <div className="flex">
-        {[1, 2, 3].map((item, index) => (
+        {["ToDo", "Doing", "Done"].map((item, index) => (
           <ListCard
             key={index}
             item={item}
@@ -107,6 +65,8 @@ function DragCards() {
             }
             handleOnDragOver={handleOnDragOver}
             handleOnDragStart={handleOnDragStart}
+            task={index === 0 ? task : index === 1 ? task1 : task2}
+            setTask={index === 0 ? setTask : index === 1 ? setTask1 : setTask2}
           />
         ))}
       </div>
