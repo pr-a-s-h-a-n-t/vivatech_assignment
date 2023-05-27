@@ -98,7 +98,14 @@ function ListCard({ handleOnDragStart, item }) {
                   style={{ wordBreak: "break-all" }}
                   onDragStart={(e) => handleOnDragStart(e, item)}
                 >
-                  <td>{item}</td>
+                  <td
+                    style={{
+                      cursor: "-webkit-grab",
+                      // cursor: "grab",
+                    }}
+                  >
+                    {item}
+                  </td>
                   <td>
                     <EditIcon onClick={() => editTask(index)} />
                     <DeleteIcon onClick={() => deleteTask(index)} />
